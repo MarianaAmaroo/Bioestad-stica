@@ -1,0 +1,47 @@
+---
+title: "variables aleatorias: Distribuciones continuas"
+format: html
+editor: visual
+---
+
+{r} #\| label: load-packages #\| code-fold: true #\| warning: false
+
+library(tidyverse) library(plotly)
+
+#Distribución unifrome continua
+
+\$
+
+##Función de densidad
+
+#\| code-fold: true
+
+# Generamos una tabla para la distribución continua
+
+tabla_continua \<- tibble(x = seq(a, b, length.out = 100))
+
+# Calculamos la función de distribución
+
+tabla_continua \<- tabla_continua \|\> mutate(f_d = punif(x, min = a, max = b))
+
+# Gráfica de la función de densidad
+
+ggplot(tabla_continua) + geom_line(aes(x, f_d), color = "#ADF122") + theme_bw() + labs(title = "Función de Densidad Uniforme Continua", x = "x", y = "F(x)")
+
+##Función de distribución {r} #\| code-fold: true
+
+tabla_continua \<- tabla_continua \|\> mutate(f_d=punif(x, min=a, max=b))
+
+ggplot(tabla_continua)+ geom_line(aes(x, f_d), color="#ADF122")+ theme_bw()
+
+## Muestra
+
+{r} #\| code-fold: true N \<- 100
+
+muestra_continua \<- tibble(ID=pastel("Muestra", 1:N,sep="\_"), x= runif(N, min=a, max=b))
+
+ggplot(muestra_continua)+ geom_histogram(aes(x), color="black", fill="red", boundary=1, binwidth = (b-a/n_bin))+ theme_bw()
+
+ggplot(muestra_continua)+ geom_histogram(aes(x), color="black", fill="red", boundary=1, binwidth = (b-a/n_bin))+ theme_bw()
+
+ggplot(muestra_continua)+ geom_density(aes(x), color="black", fill="red", after_stat(count))+ theme_bw()
